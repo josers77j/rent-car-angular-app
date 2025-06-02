@@ -1,0 +1,79 @@
+<h1 class="text-2xl font-bold">{{ user().name || 'Nuevo Usuario' }}</h1>
+<div class="divider"></div>
+
+<form
+  [formGroup]="userForm"
+  class="grid grid-cols-1 sm:grid-cols-2 gap-6"
+  (ngSubmit)="onSubmit()"
+>
+  <!-- Datos generales -->
+  <div class="flex flex-col gap-4">
+    <h2 class="text-2xl font-bold">Datos generales</h2>
+
+    <!-- Nombre -->
+    <div class="form-control">
+      <label for="name" class="label">
+        <span class="label-text font-semibold">Nombre y Apellido</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="name"
+        type="text"
+        placeholder="Ingresa el nombre completo del usuario"
+        class="input input-bordered w-full"
+        formControlName="name"
+      />
+      <form-error-label [control]="userForm.get('name')!"></form-error-label>
+    </div>
+
+    <!-- Email -->
+    <div class="form-control">
+      <label for="email" class="label">
+        <span class="label-text font-semibold">Correo electrónico</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="email"
+        type="email"
+        placeholder="Ingresa el correo electrónico"
+        class="input input-bordered w-full"
+        formControlName="email"
+      />
+      <form-error-label [control]="userForm.get('email')!"></form-error-label>
+    </div>
+
+    <!-- Role -->
+    <div class="form-control">
+      <label for="role" class="label">
+        <span class="label-text font-semibold">Rol del usuario</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <select
+        id="role"
+        class="select select-bordered w-full"
+        formControlName="role"
+      >
+        <option value="" disabled selected>Selecciona un rol</option>
+        @for(role of roleItem(); track role.id){
+          <option [value]="role.id">{{ role.name }}</option>
+        }
+      </select>
+      <form-error-label [control]="userForm.get('role')!"></form-error-label>
+    </div>
+  </div>
+
+  <!-- Botón de guardar -->
+  <div class="flex flex-col gap-4">
+    <div class="flex justify-end">
+      <button class="btn btn-primary" type="submit">
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+@if (wasSaved()) {
+  <div class="alert alert-success fixed bottom-4 right-4 w-80 animate-fadeIn">
+    <span>Datos actualizados correctamente</span>
+  </div>
+}

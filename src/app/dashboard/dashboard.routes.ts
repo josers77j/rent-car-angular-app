@@ -29,6 +29,10 @@ export const adminDashboardRoutes: Routes = [
         component: UsersAdminPageComponent
       },
       {
+        path: 'user/:userId',
+        component: UserAdminPageComponent
+      },
+      {
         path:'roles',
         component: RolesAdminPageComponent
       },

@@ -1,1 +1,11 @@
-<p>user-admin-page works!</p>,
+@if (userResource.isLoading()) {
+  <div class="flex justify-center items-center h-screen">
+    <span class="loading loading-spinner loading-lg"></span>
+  </div>
+  }
+  <!--  -->
+
+  @if( userResource.hasValue() ) {
+  <!-- Producto -->
+  <user-details [user]="userResource.value()!" [roleItem]="roleItemResource.value()!" (userUpdated)="userResource.reload()"/>
+  }

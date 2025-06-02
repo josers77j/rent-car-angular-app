@@ -1,18 +1,11 @@
-import { AbstractControl, FormArray, FormGroup, ValidationErrors } from "@angular/forms";
+import { AbstractControl, FormArray, FormGroup, FormSubmittedEvent, ValidationErrors } from "@angular/forms";
 
-async function sleep() {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(true);
-    }, 2000);
-  })
-}
 export class FormUtils {
 
-  static namePattern = '([a-zA-Z]+) ([a-zA-Z]+)';
+  static namePattern = '^([a-zA-Z]+) ([a-zA-Z]+)$';
   static emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
   static notOnlySpacesPattern = '^[a-zA-Z0-9]+$';
-
+  static onlyNumbersPattern = /^(?!0$)\d+$/;
   static getTextError(errors: ValidationErrors) {
     for (const key of Object.keys(errors)) {
       switch (key) {
@@ -25,9 +18,16 @@ export class FormUtils {
         case 'email':
           return 'El formato del email es incorrecto';
         case 'pattern':
+           if (errors['pattern'].requiredPattern === FormUtils.namePattern) {
+            return 'El formato de este campo debe contener un nombre y apellido';
+          }
           if (errors['pattern'].requiredPattern === FormUtils.emailPattern) {
             return 'El formato del email es incorrecto';
           }
+          if (errors['pattern'].requiredPattern === FormUtils.onlyNumbersPattern.toString()) {
+            return 'El rol seleccionado no es válido';
+          }
+
           return 'Error de patron contra expresion regular';
         default:
           return 'Error de validacion no controlado'

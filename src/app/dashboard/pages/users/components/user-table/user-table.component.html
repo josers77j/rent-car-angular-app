@@ -1,0 +1,54 @@
+<div class="overflow-x-auto">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>
+          <label>
+            <input type="checkbox" class="checkbox" />
+          </label>
+        </th>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Rol</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- row 1 -->
+
+      @for(user of users(); track user.id; let i = $index) {
+        <tr>
+          <th>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </th>
+          <td>
+          {{user.id}}
+          </td>
+          <td>
+            {{user.name | titlecase}}
+          </td>
+          <td>
+            {{user.email}}
+          </td>
+          <td>
+            {{user.role}}
+          <th>
+            <a
+            [routerLink]="['/services/user', user.id]"
+            class="btn btn-ghost text-accent btn-xs"
+          >
+            Detalles
+          </a>
+          </th>
+        </tr>
+      }
+
+
+    </tbody>
+
+  </table>
+</div>
