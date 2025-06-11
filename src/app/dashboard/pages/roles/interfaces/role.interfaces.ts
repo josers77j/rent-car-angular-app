@@ -1,17 +1,15 @@
 import { Timestamp } from "rxjs";
 
-export interface UsersResponse {
-  data: Users[];
+export interface RolesResponse {
+  data: Roles[];
   meta: Meta;
 }
 
-export interface Users {
+export interface Roles {
   id:        number;
   name:      string;
-  email:     string;
-  roleId:    number;
+  description:     string;
   createdAt: Date;
-  role:      string;
   updatedAt: Date;
   date:      Date;
   modifiedBy: number;
@@ -27,17 +25,7 @@ export interface Meta {
   perPage:     number;
 }
 
-export interface User {
-  email: string;
+export interface Role {
+  description: string;
   name:  string;
-  roleId:  number;
- }
-
-
- export interface RoleItem {
-  id:number;
-  name:string;
-  description:string;
-  createdAt:Date;
-  updatedAt:Date;
  }

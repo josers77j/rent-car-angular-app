@@ -10,30 +10,28 @@
         </th>
         <th>Id</th>
         <th>Nombre</th>
-        <th>Email</th>
-        <th>Rol</th>
+        <th>Descripción</th>
         <th>Fecha de modificación</th>
         <th>Modificado por</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
-      @for(user of users(); track user.id; let i = $index) {
+      @for(role of roles(); track role.id; let i = $index) {
         <tr>
           <td>
             <label>
               <input type="checkbox" class="checkbox" />
             </label>
           </td>
-          <td>{{ user.id }}</td>
-          <td>{{ user.name | titlecase }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.role }}</td>
-          <td>{{ user.updatedAt | date: 'dd/MM/yyyy, HH:mm:ss' }}</td>
-          <td>{{ user.modifiedBy }}</td>
+          <td>{{ role.id }}</td>
+          <td>{{ role.name | titlecase }}</td>
+          <td>{{ role.description }}</td>
+          <td>{{ role.updatedAt | date: 'dd/MM/yyyy, HH:mm:ss' }}</td>
+          <td>{{ role.modifiedBy }}</td>
           <td>
             <a
-              [routerLink]="['/services/user', user.id]"
+              [routerLink]="['/services/role', role.id]"
               class="btn btn-ghost text-accent btn-xs"
             >
               Editar

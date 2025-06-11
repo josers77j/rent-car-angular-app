@@ -1,0 +1,11 @@
+@if (customerResource.isLoading()) {
+  <div class="flex justify-center items-center h-screen">
+    <span class="loading loading-spinner loading-lg"></span>
+  </div>
+  }
+  <!--  -->
+
+  @if( customerResource.hasValue() ) {
+  <!-- Producto -->
+  <customer-details [customer]="customerResource.value()!" (customerUpdated)="customerResource.reload()"/>
+  }

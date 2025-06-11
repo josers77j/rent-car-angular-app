@@ -1,0 +1,60 @@
+<h1 class="text-2xl font-bold">{{ role().name || 'Nuevo rol' }}</h1>
+<div class="divider"></div>
+
+<form
+  [formGroup]="roleForm"
+  class="grid grid-cols-1 sm:grid-cols-2 gap-6"
+  (ngSubmit)="onSubmit()"
+>
+  <!-- Datos generales -->
+  <div class="flex flex-col gap-4">
+    <h2 class="text-2xl font-bold">Datos generales</h2>
+
+    <!-- Nombre -->
+    <div class="form-control">
+      <label for="name" class="label">
+        <span class="label-text font-semibold">Nombre del rol</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="name"
+        type="text"
+        placeholder="Ingresa el nombre del rol"
+        class="input input-bordered w-full"
+        formControlName="name"
+      />
+      <form-error-label [control]="roleForm.get('name')!"></form-error-label>
+    </div>
+
+    <!-- Descripción -->
+    <div class="form-control">
+      <label for="description" class="label">
+        <span class="label-text font-semibold">Descripción</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="description"
+        type="description"
+        placeholder="Ingresa la descripción"
+        class="input input-bordered w-full"
+        formControlName="description"
+      />
+      <form-error-label [control]="roleForm.get('description')!"></form-error-label>
+    </div>
+  </div>
+
+  <!-- Botón de guardar -->
+  <div class="flex flex-col gap-4">
+    <div class="flex justify-end">
+      <button class="btn btn-primary" type="submit">
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+@if (wasSaved()) {
+  <div class="alert alert-success fixed bottom-4 right-4 w-80 animate-fadeIn">
+    <span>Datos actualizados correctamente</span>
+  </div>
+}

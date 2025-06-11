@@ -1,5 +1,5 @@
-<h1 class="text-2xl font-bold">Listado de usuarios</h1>
-<h3 class="text-lg">Total de usuarios:
+<h1 class="text-2xl font-bold">Listado de clientes</h1>
+<h3 class="text-lg">Total de clientes:
   <span class="text-accent">
     {{usersResource.value()?.meta?.total}}
   </span>
@@ -8,13 +8,13 @@
 
 <div class="flex gap-2 items-center h-20">
   <app-pagination
-    [pages]="usersResource.value()?.meta?.lastpage ?? 1"
+    [pages]="customersResource.value()?.meta?.lastpage ?? 1"
     [currentPage]="paginationService.currentPage()"
   />
 
   <select
     class="select select-bordered w-32"
-    (change)="usersPerPage.set(+selectPerPage.value)"
+    (change)="customersPerPage.set(+selectPerPage.value)"
     #selectPerPage
   >
   <option value="10">10</option>
@@ -24,10 +24,10 @@
   <div class="flex flex-1"></div>
 
 
-  <button class="btn btn-primary" routerLink="/services/user">
-    Nuevo usuario
+  <button class="btn btn-primary" routerLink="/services/customer">
+    Nuevo cliente
   </button>
 
 </div>
 
-<user-table [users]="usersResource.value()?.data ?? []"></user-table>
+<customer-table [customers]="customersResource.value()?.data ?? []"></customer-table>
