@@ -10,30 +10,36 @@
         </th>
         <th>Id</th>
         <th>Nombre</th>
+        <th>Teléfono</th>
         <th>Email</th>
-        <th>Rol</th>
+        <th>Dirección</th>
+        <th>Identificación</th>
+        <th>Tipo de identificación</th>
         <th>Fecha de modificación</th>
         <th>Modificado por</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
-      @for(user of users(); track user.id; let i = $index) {
+      @for(customer of customers(); track customer.id; let i = $index) {
         <tr>
           <td>
             <label>
               <input type="checkbox" class="checkbox" />
             </label>
           </td>
-          <td>{{ user.id }}</td>
-          <td>{{ user.name | titlecase }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.role }}</td>
-          <td>{{ user.updatedAt | date: 'dd/MM/yyyy, HH:mm:ss' }}</td>
-          <td>{{ user.modifiedBy }}</td>
+          <td>{{ customer.id }}</td>
+          <td>{{ customer.name | titlecase }}</td>
+          <td>{{ customer.phone }}</td>
+          <td>{{ customer.email }}</td>
+          <td>{{ customer.address }}</td>
+          <td>{{ customer.identification }}</td>
+          <td>{{ customer.identificationType }}</td>
+          <td>{{ customer.updatedAt | date: 'dd/MM/yyyy, HH:mm:ss' }}</td>
+          <td>{{ customer.modifiedBy }}</td>
           <td>
             <a
-              [routerLink]="['/services/user', user.id]"
+              [routerLink]="['/services/customer', customer.id]"
               class="btn btn-ghost text-accent btn-xs"
             >
               Editar

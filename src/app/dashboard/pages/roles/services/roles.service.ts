@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, of, tap } from 'rxjs';
-import {   RoleItem, User, Users, UsersResponse } from '../interfaces/user.interfaces';
+import { Role, Roles, RolesResponse } from '../interfaces/role.interfaces';
 import { environment } from '../../../../../environments/environment.development';
-import { UserMapper } from '../mapper/user.mapper';
+import { RoleMapper } from '../mapper/role.mapper';
 
 const baseUrl = environment.baseUrl;
 interface Options {
@@ -11,12 +11,10 @@ interface Options {
   page?: number;
 }
 
-const emptyUser: Users = {
+const emptyRole: Roles = {
   id: 0,
   name: '',
-  email: '',
-  roleId: 0,
-  role: '',
+  description: '',
   createdAt: new Date(),
   updatedAt: new Date(),
   date:      new Date(),
@@ -27,19 +25,19 @@ const emptyUser: Users = {
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class RolesService {
 
   private http = inject(HttpClient);
 
-  private _usersCache = new Map<string, UsersResponse>();
-  private _userCache = new Map<number, Users>();
-  getUsers(options: Options): Observable<UsersResponse> {
+  private _rolesCache = new Map<string, RolesResponse>();
+  private _roleCache = new Map<number, Roles>();
+  getRoles(options: Options): Observable<RolesResponse> {
     const { perPage = 9, page = 0 } = options;
 
     const key = `${perPage}-${page}`; // 9-0
 
     return this.http
-      .get<UsersResponse>(`${baseUrl}/users/all`, {
+      .get<RolesResponse>(`${baseUrl}/roles/all`, {
         params: {
           perPage,
           page,
@@ -50,55 +48,45 @@ export class UsersService {
       );
   }
 
-  createUser(user: User): Observable<Users> {
+  createRole(role: Role): Observable<Roles> {
 
     return this.http
-    .post<Users>(`${baseUrl}/users`, user)
+    .post<Roles>(`${baseUrl}/roles`, role)
     .pipe(
       tap((resp) => console.log('creando',resp))
     );
 
   }
 
-  updateUser(
+  updateRole(
     id: number,
-    userLike: Partial<User>
-  ): Observable<Users> {
+    userLike: Partial<Role>
+  ): Observable<Roles> {
     return this.http
-      .patch<Users>(`${baseUrl}/users/${id}`, userLike)
+      .patch<Roles>(`${baseUrl}/roles/${id}`, userLike)
       .pipe(
         tap((resp) => console.log('actualizando ',resp))
       );
   }
 
-  getUserById(id: number): Observable<Users> {
+  getRoleById(id: number): Observable<Roles> {
     if (!id) {
-      return of(emptyUser);
+      return of(emptyRole);
     }
 
-    if (this._userCache.has(id)) {
-      return of(this._userCache.get(id)!);
+    if (this._roleCache.has(id)) {
+      return of(this._roleCache.get(id)!);
     }
 
     return this.http
-      .get<UsersResponse>(`${baseUrl}/users/all`,{
+      .get<RolesResponse>(`${baseUrl}/roles/all`,{
         params:{
-          userId: id
+          roleId: id
         }
       } )
       .pipe(
-        map((userData) => userData.data[0]),
+        map((roleData) => roleData.data[0]),
       );
   }
-
-  getRoles(): Observable<RoleItem[]> {
-    return this.http
-    .get<RoleItem[]>(`${baseUrl}/roles/all`)
-    .pipe(
-      tap((resp) => console.log(resp)),
-    );
-
-  }
-
 
 }

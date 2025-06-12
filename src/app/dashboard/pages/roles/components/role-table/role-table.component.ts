@@ -1,14 +1,14 @@
 import { Component, computed, input } from '@angular/core';
-import { Users } from '../../interfaces/user.interfaces';
+import { Roles } from '../../interfaces/role.interfaces';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'user-table',
+  selector: 'role-table',
   imports: [TitleCasePipe, RouterLink, DatePipe],
-  templateUrl: './user-table.component.html',
+  templateUrl: './role-table.component.html',
 })
-export class UserTableComponent {
-  users = input.required<Users[]>();
+export class RoleTableComponent {
+  roles = input.required<Roles[]>();
 
 }

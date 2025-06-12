@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, of, tap } from 'rxjs';
-import {   RoleItem, User, Users, UsersResponse } from '../interfaces/user.interfaces';
+import { Vehicle, Vehicles, VehiclesResponse } from '../interfaces/vehicle.interfaces';
 import { environment } from '../../../../../environments/environment.development';
-import { UserMapper } from '../mapper/user.mapper';
+import { VehicleMapper } from '../mapper/vehicle.mapper';
 
 const baseUrl = environment.baseUrl;
 interface Options {
@@ -11,12 +11,13 @@ interface Options {
   page?: number;
 }
 
-const emptyUser: Users = {
+const emptyVehicle: Vehicles = {
   id: 0,
-  name: '',
-  email: '',
-  roleId: 0,
-  role: '',
+  plateNumber: '',
+  brand: '',
+  model: '',
+  type: '',
+  year: 0,
   createdAt: new Date(),
   updatedAt: new Date(),
   date:      new Date(),
@@ -27,19 +28,19 @@ const emptyUser: Users = {
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class VehiclesService {
 
   private http = inject(HttpClient);
 
-  private _usersCache = new Map<string, UsersResponse>();
-  private _userCache = new Map<number, Users>();
-  getUsers(options: Options): Observable<UsersResponse> {
+  private _vehiclesCache = new Map<string, VehiclesResponse>();
+  private _vehicleCache = new Map<number, Vehicles>();
+  getVehicles(options: Options): Observable<VehiclesResponse> {
     const { perPage = 9, page = 0 } = options;
 
     const key = `${perPage}-${page}`; // 9-0
 
     return this.http
-      .get<UsersResponse>(`${baseUrl}/users/all`, {
+      .get<VehiclesResponse>(`${baseUrl}/vehicles/all`, {
         params: {
           perPage,
           page,
@@ -50,55 +51,45 @@ export class UsersService {
       );
   }
 
-  createUser(user: User): Observable<Users> {
+  createVehicle(vehicle: Vehicles): Observable<Vehicles> {
 
     return this.http
-    .post<Users>(`${baseUrl}/users`, user)
+    .post<Vehicles>(`${baseUrl}/vehicles`, vehicle)
     .pipe(
       tap((resp) => console.log('creando',resp))
     );
 
   }
 
-  updateUser(
+  updateVehicle(
     id: number,
-    userLike: Partial<User>
-  ): Observable<Users> {
+    vehicleLike: Partial<Vehicle>
+  ): Observable<Vehicles> {
     return this.http
-      .patch<Users>(`${baseUrl}/users/${id}`, userLike)
+      .patch<Vehicles>(`${baseUrl}/vehicles/${id}`, vehicleLike)
       .pipe(
         tap((resp) => console.log('actualizando ',resp))
       );
   }
 
-  getUserById(id: number): Observable<Users> {
+  getVehicleById(id: number): Observable<Vehicles> {
     if (!id) {
-      return of(emptyUser);
+      return of(emptyVehicle);
     }
 
-    if (this._userCache.has(id)) {
-      return of(this._userCache.get(id)!);
+    if (this._vehicleCache.has(id)) {
+      return of(this._vehicleCache.get(id)!);
     }
 
     return this.http
-      .get<UsersResponse>(`${baseUrl}/users/all`,{
+      .get<VehiclesResponse>(`${baseUrl}/vehicles/all`,{
         params:{
-          userId: id
+          vehicleId: id
         }
       } )
       .pipe(
-        map((userData) => userData.data[0]),
+        map((vehicleData) => vehicleData.data[0]),
       );
   }
-
-  getRoles(): Observable<RoleItem[]> {
-    return this.http
-    .get<RoleItem[]>(`${baseUrl}/roles/all`)
-    .pipe(
-      tap((resp) => console.log(resp)),
-    );
-
-  }
-
 
 }

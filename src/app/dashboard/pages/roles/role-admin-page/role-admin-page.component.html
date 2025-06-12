@@ -1,1 +1,11 @@
-<p>role-admin-page works!</p>,
+@if (roleResource.isLoading()) {
+  <div class="flex justify-center items-center h-screen">
+    <span class="loading loading-spinner loading-lg"></span>
+  </div>
+  }
+  <!--  -->
+
+  @if( roleResource.hasValue() ) {
+  <!-- Producto -->
+  <role-details [role]="roleResource.value()!" (roleUpdated)="roleResource.reload()"/>
+  }

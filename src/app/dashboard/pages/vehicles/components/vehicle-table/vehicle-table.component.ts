@@ -1,14 +1,14 @@
 import { Component, computed, input } from '@angular/core';
-import { Users } from '../../interfaces/user.interfaces';
+import { Vehicles } from '../../interfaces/vehicle.interfaces';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'user-table',
+  selector: 'vehicle-table',
   imports: [TitleCasePipe, RouterLink, DatePipe],
-  templateUrl: './user-table.component.html',
+  templateUrl: './vehicle-table.component.html',
 })
-export class UserTableComponent {
-  users = input.required<Users[]>();
+export class VehicleTableComponent {
+  vehicles = input.required<Vehicles[]>();
 
 }

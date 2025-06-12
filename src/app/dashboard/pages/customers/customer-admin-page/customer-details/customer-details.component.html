@@ -1,0 +1,125 @@
+<h1 class="text-2xl font-bold">{{ customer().name || 'Nuevo cliente' }}</h1>
+<div class="divider"></div>
+
+<form
+  [formGroup]="customerForm"
+  class="grid grid-cols-1 sm:grid-cols-2 gap-6"
+  (ngSubmit)="onSubmit()"
+>
+  <!-- Datos generales -->
+  <div class="flex flex-col gap-4">
+    <h2 class="text-2xl font-bold">Datos generales</h2>
+
+    <!-- Nombre -->
+    <div class="form-control">
+      <label for="name" class="label">
+        <span class="label-text font-semibold">Nombre y Apellido</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="name"
+        type="text"
+        placeholder="Ingresa el nombre completo del cliente"
+        class="input input-bordered w-full"
+        formControlName="name"
+      />
+      <form-error-label [control]="customerForm.get('name')!"></form-error-label>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="form-control">
+      <label for="phone" class="label">
+        <span class="label-text font-semibold">Teléfono</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="phone"
+        type="phone"
+        placeholder="Ingresa el teléfono"
+        class="input input-bordered w-full"
+        formControlName="phone"
+      />
+      <form-error-label [control]="customerForm.get('phone')!"></form-error-label>
+    </div>
+
+    <!-- Email -->
+    <div class="form-control">
+      <label for="email" class="label">
+        <span class="label-text font-semibold">Correo electrónico</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="email"
+        type="email"
+        placeholder="Ingresa el correo electrónico"
+        class="input input-bordered w-full"
+        formControlName="email"
+      />
+      <form-error-label [control]="customerForm.get('email')!"></form-error-label>
+    </div>
+
+    <!-- Dirección -->
+    <div class="form-control">
+      <label for="address" class="label">
+        <span class="label-text font-semibold">Dirección</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="address"
+        type="text"
+        placeholder="Ingresa la dirección del cliente"
+        class="input input-bordered w-full"
+        formControlName="address"
+      />
+      <form-error-label [control]="customerForm.get('address')!"></form-error-label>
+    </div>
+
+    <!-- Identificación -->
+    <div class="form-control">
+      <label for="identification" class="label">
+        <span class="label-text font-semibold">Identificación</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="identificaction"
+        type="text"
+        placeholder="Ingresa la identificación del cliente"
+        class="input input-bordered w-full"
+        formControlName="identification"
+      />
+      <form-error-label [control]="customerForm.get('identification')!"></form-error-label>
+    </div>
+
+    <!-- Tipo de identificación -->
+    <div class="form-control">
+      <label for="identificationType" class="label">
+        <span class="label-text font-semibold">Tipo de identificación</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <select
+        id="identificationType"
+        class="select select-bordered w-full"
+        formControlName="identificationType"
+      >
+        <option value="" disabled selected>Selecciona un tipo de identificación</option>
+        <option *ngFor="let type of identificationTypes" [value]="type">{{ type }}</option>
+      </select>
+      <form-error-label [control]="customerForm.get('customer')!"></form-error-label>
+    </div>
+  </div>
+
+  <!-- Botón de guardar -->
+  <div class="flex flex-col gap-4">
+    <div class="flex justify-end">
+      <button class="btn btn-primary" type="submit">
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+@if (wasSaved()) {
+  <div class="alert alert-success fixed bottom-4 right-4 w-80 animate-fadeIn">
+    <span>Datos actualizados correctamente</span>
+  </div>
+}

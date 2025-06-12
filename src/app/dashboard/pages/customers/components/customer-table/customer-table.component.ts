@@ -1,14 +1,14 @@
 import { Component, computed, input } from '@angular/core';
-import { Users } from '../../interfaces/user.interfaces';
+import { Customers } from '../../interfaces/customer.interfaces';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'user-table',
+  selector: 'customer-table',
   imports: [TitleCasePipe, RouterLink, DatePipe],
-  templateUrl: './user-table.component.html',
+  templateUrl: './customer-table.component.html',
 })
-export class UserTableComponent {
-  users = input.required<Users[]>();
+export class CustomerTableComponent {
+  customers = input.required<Customers[]>();
 
 }
