@@ -1,0 +1,50 @@
+<div class="overflow-x-auto">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>
+          <label>
+            <input type="checkbox" class="checkbox" />
+          </label>
+        </th>
+        <th>Id</th>
+        <th>Placa</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Año</th>
+        <th>Categoría</th>
+        <th>Fecha de modificación</th>
+        <th>Modificado por</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(vehicle of vehicles(); track vehicle.id; let i = $index) {
+        <tr>
+          <td>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </td>
+          <td>{{ vehicle.id }}</td>
+          <td>{{ vehicle.plateNumber | titlecase }}</td>
+          <td>{{ vehicle.brand }}</td>
+          <td>{{ vehicle.model }}</td>
+          <td>{{ vehicle.year }}</td>
+          <td>{{ vehicle.type }}</td>
+          <td>{{ vehicle.updatedAt | date: 'dd/MM/yyyy, HH:mm:ss' }}</td>
+          <td>{{ vehicle.modifiedBy }}</td>
+          <td>
+            <a
+              [routerLink]="['/services/vehicle', vehicle.id]"
+              class="btn btn-ghost text-accent btn-xs"
+            >
+              Editar
+            </a>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

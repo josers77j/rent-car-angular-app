@@ -1,0 +1,108 @@
+<h1 class="text-2xl font-bold">{{ vehicle().name || 'Nuevo vehículo' }}</h1>
+<div class="divider"></div>
+
+<form
+  [formGroup]="vehicleForm"
+  class="grid grid-cols-1 sm:grid-cols-2 gap-6"
+  (ngSubmit)="onSubmit()"
+>
+  <!-- Datos generales -->
+  <div class="flex flex-col gap-4">
+    <h2 class="text-2xl font-bold">Datos generales</h2>
+
+    <!-- Nombre -->
+    <div class="form-control">
+      <label for="plateNumber" class="label">
+        <span class="label-text font-semibold">No. de placa</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="plateNumber"
+        type="text"
+        placeholder="Ingresa el número de placa"
+        class="input input-bordered w-full"
+        formControlName="plateNumber"
+      />
+      <form-error-label [control]="vehicleForm.get('plateNumber')!"></form-error-label>
+    </div>
+
+    <!-- Email -->
+    <div class="form-control">
+      <label for="brand" class="label">
+        <span class="label-text font-semibold">Marca</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="brand"
+        type="text"
+        placeholder="Ingresa la marca"
+        class="input input-bordered w-full"
+        formControlName="brand"
+      />
+      <form-error-label [control]="vehicleForm.get('brand')!"></form-error-label>
+    </div>
+
+    <!-- Role -->
+    <div class="form-control">
+      <label for="model" class="label">
+        <span class="label-text font-semibold">Modelo</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="model"
+        type="text"
+        placeholder="Ingresa el modelo"
+        class="input input-bordered w-full"
+        formControlName="model"
+      />
+      <form-error-label [control]="vehicleForm.get('model')!"></form-error-label>
+    </div>
+
+    <!-- Role -->
+    <div class="form-control">
+      <label for="year" class="label">
+        <span class="label-text font-semibold">Año</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="year"
+        type="number"
+        placeholder="Ingresa el año"
+        class="input input-bordered w-full"
+        formControlName="year"
+      />
+      <form-error-label [control]="vehicleForm.get('year')!"></form-error-label>
+    </div>
+
+    <!-- Role -->
+    <div class="form-control">
+      <label for="type" class="label">
+        <span class="label-text font-semibold">Categoría</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="type"
+        type="number"
+        placeholder="Ingresa la categoría"
+        class="input input-bordered w-full"
+        formControlName="type"
+      />
+      <form-error-label [control]="vehicleForm.get('type')!"></form-error-label>
+    </div>
+  </div>
+
+  <!-- Botón de guardar -->
+  <div class="flex flex-col gap-4">
+    <div class="flex justify-end">
+      <button class="btn btn-primary" type="submit">
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+@if (wasSaved()) {
+  <div class="alert alert-success fixed bottom-4 right-4 w-80 animate-fadeIn">
+    <span>Datos actualizados correctamente</span>
+  </div>
+}
