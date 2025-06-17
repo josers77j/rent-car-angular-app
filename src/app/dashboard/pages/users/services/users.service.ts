@@ -91,14 +91,15 @@ export class UsersService {
       );
   }
 
-  getRoles(): Observable<RoleItem[]> {
-    return this.http
-    .get<RoleItem[]>(`${baseUrl}/roles/all`)
+getRoles(): Observable<RoleItem[]> {
+  return this.http
+    .get<{ data: RoleItem[] }>(`${baseUrl}/roles/all`)
     .pipe(
-      tap((resp) => console.log(resp)),
+      map((response) => response.data), // Extrae solo el array de roles
+      tap((roles) => console.log('Roles obtenidos:', roles))
     );
+}
 
-  }
 
 
 }

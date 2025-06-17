@@ -8,7 +8,7 @@
 
 <div class="flex gap-2 items-center h-20">
   <app-pagination
-    [pages]="customersResource.value()?.meta?.lastpage ?? 1"
+    [pages]="customersResource.value()?.meta?.lastPage ?? 1"
     [currentPage]="paginationService.currentPage()"
   />
 
