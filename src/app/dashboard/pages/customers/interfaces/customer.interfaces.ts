@@ -6,27 +6,28 @@ export interface CustomersResponse {
 }
 
 export interface Customers {
-  id:        number;
-  name:      string;
-  phone:     string;
-  email:     string;
-  address:    string;
+  id: number;
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
+  identification: string;
+  identificationType: string;
+  createdBy: string;
+  modifiedBy: string;
+  deletedBy?: string;
   createdAt: Date;
-  identification:      string;
-  identificationType:      string;
   updatedAt: Date;
-  date:      Date;
-  modifiedBy: number;
-  modified:   string;
+  deletedAt?: Date;
 }
 
 export interface Meta {
-  total:       number;
-  lastpage:    number;
-  page: number;
-  prev:        null;
-  next:        number;
-  perPage:     number;
+  total: number;
+  lastPage: number;
+  currentPage: number;  // Cambiar de "page" a "currentPage"
+  perPage: number;
+  prev: null | number;
+  next: null | number;
 }
 
 export interface Customer {

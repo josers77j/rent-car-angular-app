@@ -9,6 +9,12 @@ import { RolesAdminPageComponent } from "./pages/roles/roles-admin-page/roles-ad
 import { PasswordUpdatePageComponent } from "./pages/settings/settings-layout-page/password-update-page/password-update-page.component";
 import { SettingsLayoutPageComponent } from "./pages/settings/settings-layout-page/settings-layout-page.component";
 import { InformationUpdatePageComponent } from "./pages/settings/settings-layout-page/information-update-page/information-update-page.component";
+import { RoleDetailsComponent } from "./pages/roles/role-admin-page/role-details/role-details.component";
+import { RoleTableComponent } from "./pages/roles/components/role-table/role-table.component";
+import { CustomerAdminPageComponent } from "./pages/customers/customer-admin-page/customer-admin-page.component";
+import { CustomerDetailsComponent } from "./pages/customers/customer-admin-page/customer-details/customer-details.component";
+import { CustomerTableComponent } from "./pages/customers/components/customer-table/customer-table.component";
+import { CustomersAdminPageComponent } from "./pages/customers/customers-admin-page/customers-admin-page.component";
 
 export const adminDashboardRoutes: Routes = [
   {
@@ -20,6 +26,8 @@ export const adminDashboardRoutes: Routes = [
         path: 'vehicles',
         component: VehiclesAdminPageComponent
       },
+
+      
       {
         path: 'vehicle/:vehicleId',
         component: VehicleAdminPageComponent
@@ -35,6 +43,23 @@ export const adminDashboardRoutes: Routes = [
       {
         path:'roles',
         component: RolesAdminPageComponent
+      },
+       {
+        path: 'roles/new', // Aquí se define la ruta al formulario de nuevo rol
+        component: RoleDetailsComponent,
+      },
+      {
+  path: 'roles/:roleId', // Ruta con parámetro para editar roles
+  component: RoleDetailsComponent,
+},
+  { path: 'customers', component: CustomersAdminPageComponent },
+  {
+        path: 'customer',
+        component: CustomerDetailsComponent
+      },
+      {
+        path: 'customer/:customersId',
+        component: CustomerDetailsComponent
       },
       {
         path: 'settings',
@@ -61,7 +86,9 @@ export const adminDashboardRoutes: Routes = [
       {
         path: '**',
         redirectTo: 'cars',
-      }
+      },
+     
+
     ]
   }
 ];

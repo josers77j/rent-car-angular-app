@@ -1,6 +1,9 @@
 import { AbstractControl, FormArray, FormGroup, FormSubmittedEvent, ValidationErrors } from "@angular/forms";
 
 export class FormUtils {
+  static descriptionPattern(descriptionPattern: any): string | ((control: AbstractControl) => ValidationErrors | null) {
+    throw new Error('Method not implemented.');
+  }
 
   static namePattern = '^([a-zA-Z]+) ([a-zA-Z]+)$';
   static emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';

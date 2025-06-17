@@ -102,7 +102,7 @@
         formControlName="identificationType"
       >
         <option value="" disabled selected>Selecciona un tipo de identificación</option>
-        <option *ngFor="let type of identificationTypes" [value]="type">{{ type }}</option>
+       
       </select>
       <form-error-label [control]="customerForm.get('customer')!"></form-error-label>
     </div>

@@ -21,32 +21,31 @@
       </tr>
     </thead>
     <tbody>
-      @for(customer of customers(); track customer.id; let i = $index) {
-        <tr>
-          <td>
-            <label>
-              <input type="checkbox" class="checkbox" />
-            </label>
-          </td>
-          <td>{{ customer.id }}</td>
-          <td>{{ customer.name | titlecase }}</td>
-          <td>{{ customer.phone }}</td>
-          <td>{{ customer.email }}</td>
-          <td>{{ customer.address }}</td>
-          <td>{{ customer.identification }}</td>
-          <td>{{ customer.identificationType }}</td>
-          <td>{{ customer.updatedAt | date: 'dd/MM/yyyy, HH:mm:ss' }}</td>
-          <td>{{ customer.modifiedBy }}</td>
-          <td>
-            <a
-              [routerLink]="['/services/customer', customer.id]"
-              class="btn btn-ghost text-accent btn-xs"
-            >
-              Editar
-            </a>
-          </td>
-        </tr>
-      }
+      <!-- Aquí colocas el *ngFor -->
+      <tr *ngFor="let customer of customers">
+        <td>
+          <label>
+            <input type="checkbox" class="checkbox" />
+          </label>
+        </td>
+        <td>{{ customer.id }}</td>
+        <td>{{ customer.name | titlecase }}</td>
+        <td>{{ customer.phone }}</td>
+        <td>{{ customer.email }}</td>
+        <td>{{ customer.address }}</td>
+        <td>{{ customer.identification }}</td>
+        <td>{{ customer.identificationType }}</td>
+        <td>{{ customer.updatedAt | date: 'dd/MM/yyyy, HH:mm:ss' }}</td>
+        <td>{{ customer.modifiedBy }}</td>
+        <td>
+          <a
+            [routerLink]="['/services/customer', customer.id]"
+            class="btn btn-ghost text-accent btn-xs"
+          >
+            Editar
+          </a>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>

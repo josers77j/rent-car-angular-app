@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, of, tap } from 'rxjs';
-import { Role, Roles, RolesResponse } from '../interfaces/role.interfaces';
+import { Roles, RolesResponse } from '../interfaces/role.interfaces';
 import { environment } from '../../../../../environments/environment.development';
 import { RoleMapper } from '../mapper/role.mapper';
 
@@ -15,11 +15,13 @@ const emptyRole: Roles = {
   id: 0,
   name: '',
   description: '',
+   createdBy: '',
   createdAt: new Date(),
   updatedAt: new Date(),
-  date:      new Date(),
-  modifiedBy: 0,
-  modified:   '',
+  deletedAt:   null,
+  deletedBy: '',
+  modifiedBy: '',
+
 };
 
 @Injectable({
@@ -48,7 +50,7 @@ export class RolesService {
       );
   }
 
-  createRole(role: Role): Observable<Roles> {
+  createRole(role: Roles): Observable<Roles> {
 
     return this.http
     .post<Roles>(`${baseUrl}/roles`, role)
@@ -60,7 +62,7 @@ export class RolesService {
 
   updateRole(
     id: number,
-    userLike: Partial<Role>
+    userLike: Partial<Roles>
   ): Observable<Roles> {
     return this.http
       .patch<Roles>(`${baseUrl}/roles/${id}`, userLike)

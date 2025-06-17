@@ -2,8 +2,7 @@ import { Component, EventEmitter, inject, input, OnInit, Output, signal } from '
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { FormUtils } from '../../../../../utils/form-utils';
-import { Roles, Role } from '../../interfaces/role.interfaces';
+import { Roles } from '../../interfaces/role.interfaces';
 import { RolesService } from '../../services/roles.service';
 import { FormErrorLabelComponent } from '../../../../../shared/components/form-error-label/form-error-label.component';
 import { RoleUpdateService } from '../../services/role-update.service';
@@ -26,8 +25,8 @@ export class RoleDetailsComponent   implements OnInit   {
   wasSaved = signal(false);
 
   roleForm = this.fb.group({
-    name: [''/*, [Validators.required, Validators.pattern(FormUtils.namePattern)]*/],
-    description: [''/*, [Validators.required, Validators.pattern(FormUtils.descriptionPattern)]*/],
+    name: ['', [Validators.required]],
+    description: ['', [Validators.required, ]],
   });
 
 
@@ -44,36 +43,67 @@ export class RoleDetailsComponent   implements OnInit   {
   }
 
   async onSubmit() {
-    const isValid = this.roleForm.valid;
-    this.roleForm.markAllAsTouched();
+  console.log('submit disparado');
+  console.log(this.roleForm.value);
+  
+  const isValid = this.roleForm.valid;
+  this.roleForm.markAllAsTouched();
 
-    if (!isValid) return;
+  if (!isValid) return;
 
-    const formValue = this.roleForm.value;
-    const role: Role = {
-      name: formValue.name!,
-      description: formValue.description!,
-    };
+  // Verificar que el role esté disponible
+  const currentRole = this.role();
+  if (!currentRole) {
+    console.error('Role no está disponible');
+    return;
+  }
 
-    if (!this.role().id) {
-      // Crear rol
+  const formValue = this.roleForm.value;
+  const role: Roles = {
+    name: formValue.name!,
+    description: formValue.description!,
+    id: 0,
+    createdBy: null,
+    modifiedBy: null,
+    deletedBy: null,
+    createdAt: null,
+    updatedAt: null,
+    deletedAt: null
+  };
+
+  const isNewRole = !currentRole.id || currentRole.id === 0;
+
+  if (isNewRole) {
+    // Crear rol
+    try {
       const roleResponse: Roles = await firstValueFrom(
         this.rolesService.createRole(role)
       );
       console.log('Rol creado:', roleResponse);
-    } else {
-      // Actualizar rol
+    } catch (error) {
+      console.error('Error creando rol:', error);
+      return;
+    }
+  } else {
+    // Actualizar rol
+    role.id = currentRole.id;
+    try {
       await firstValueFrom(
-        this.rolesService.updateRole(this.role().id, role)
+        this.rolesService.updateRole(currentRole.id, role)
       );
       console.log('Rol actualizado');
+    } catch (error) {
+      console.error('Error actualizando rol:', error);
+      return;
     }
-
-    // Notificar que un usuario fue creado o actualizado
-    this.RoleUpdateService.notifyRoleUpdated();
-
-    // Navegar de regreso a la lista de usuarios
-    this.router.navigate(['/services/roles']);
   }
 
+  // Notificar que un rol fue creado o actualizado
+  this.RoleUpdateService.notifyRoleUpdated();
+
+  // Navegar de regreso a la lista de roles
+  this.router.navigate(['/services/roles']);
 }
+}  
+
+

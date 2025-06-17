@@ -28,12 +28,10 @@
           <td>{{ role.name | titlecase }}</td>
           <td>{{ role.description }}</td>
           <td>{{ role.updatedAt | date: 'dd/MM/yyyy, HH:mm:ss' }}</td>
-          <td>{{ role.modifiedBy }}</td>
+        <td>{{ role.modifiedBy || 'Sin datos' }}</td>
           <td>
             <a
-              [routerLink]="['/services/role', role.id]"
-              class="btn btn-ghost text-accent btn-xs"
-            >
+               [routerLink]="['/roles', role.id]" class="btn btn-ghost text-accent btn-xs">
               Editar
             </a>
           </td>
