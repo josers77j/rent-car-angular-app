@@ -8,7 +8,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CustomerUpdateService } from '../services/customer-update.service';
 
 @Component({
-  selector: 'app-users-admin-page',
+  selector: 'app-customers-admin-page',
   imports: [CustomerTableComponent, PaginationComponent, RouterLink],
   templateUrl: './customers-admin-page.component.html',
 })
@@ -17,7 +17,7 @@ export class CustomersAdminPageComponent {
   paginationService = inject(PaginationService);
 
   constructor(private customerUpdateService: CustomerUpdateService) {
-    // Suscribirse al evento de actualización de usuarios
+    // Suscribirse al evento de actualización de clientes
     this.customerUpdateService.customerUpdated$.subscribe(() => {
       console.log('Cliente actualizado, recargando tabla...');
       this.customersResource.reload();

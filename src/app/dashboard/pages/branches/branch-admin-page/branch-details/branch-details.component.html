@@ -1,0 +1,76 @@
+<h1 class="text-2xl font-bold">{{ branch().district || 'Nueva sucursal' }}</h1>
+<div class="divider"></div>
+
+<form
+  [formGroup]="branchForm"
+  class="grid grid-cols-1 sm:grid-cols-2 gap-6"
+  (ngSubmit)="onSubmit()"
+>
+  <!-- Datos generales -->
+  <div class="flex flex-col gap-4">
+    <h2 class="text-2xl font-bold">Datos generales</h2>
+
+    <!-- Departamento -->
+    <div class="form-control">
+      <label for="name" class="label">
+        <span class="label-text font-semibold">Departamento</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="state"
+        type="text"
+        placeholder="Ingresa el departamento"
+        class="input input-bordered w-full"
+        formControlName="state"
+      />
+      <form-error-label [control]="branchForm.get('state')!"></form-error-label>
+    </div>
+
+    <!-- Municipio -->
+    <div class="form-control">
+      <label for="city" class="label">
+        <span class="label-text font-semibold">Municipio</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="city"
+        type="text"
+        placeholder="Ingresa el municipio"
+        class="input input-bordered w-full"
+        formControlName="city"
+      />
+      <form-error-label [control]="branchForm.get('city')!"></form-error-label>
+    </div>
+
+    <!-- Distrito -->
+    <div class="form-control">
+      <label for="district" class="label">
+        <span class="label-text font-semibold">Distrito</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="district"
+        type="text"
+        placeholder="Ingresa el distrito"
+        class="input input-bordered w-full"
+        formControlName="district"
+      />
+      <form-error-label [control]="branchForm.get('district')!"></form-error-label>
+    </div>
+  </div>
+
+  <!-- Botón de guardar -->
+  <div class="flex flex-col gap-4">
+    <div class="flex justify-end">
+      <button class="btn btn-primary" type="submit">
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+@if (wasSaved()) {
+  <div class="alert alert-success fixed bottom-4 right-4 w-80 animate-fadeIn">
+    <span>Datos actualizados correctamente</span>
+  </div>
+}

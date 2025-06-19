@@ -26,8 +26,8 @@ export class RoleDetailsComponent   implements OnInit   {
   wasSaved = signal(false);
 
   roleForm = this.fb.group({
-    name: [''/*, [Validators.required, Validators.pattern(FormUtils.namePattern)]*/],
-    description: [''/*, [Validators.required, Validators.pattern(FormUtils.descriptionPattern)]*/],
+    name: ['', [Validators.required, Validators.pattern(FormUtils.generalTextPattern)]],
+    description: ['', [Validators.required, Validators.pattern(FormUtils.descriptionPattern)]],
   });
 
 
@@ -69,10 +69,10 @@ export class RoleDetailsComponent   implements OnInit   {
       console.log('Rol actualizado');
     }
 
-    // Notificar que un usuario fue creado o actualizado
+    // Notificar que un rol fue creado o actualizado
     this.RoleUpdateService.notifyRoleUpdated();
 
-    // Navegar de regreso a la lista de usuarios
+    // Navegar de regreso a la lista de roles
     this.router.navigate(['/services/roles']);
   }
 

@@ -1,0 +1,48 @@
+<div class="overflow-x-auto">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>
+          <label>
+            <input type="checkbox" class="checkbox" />
+          </label>
+        </th>
+        <th>Id</th>
+        <th>Alquiler</th>
+        <th>Monto</th>
+        <th>Método de pago</th>
+        <th>Fecha de pago</th>
+        <th>Fecha de modificación</th>
+        <th>Modificado por</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(payment of payments(); track payment.id; let i = $index) {
+        <tr>
+          <td>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </td>
+          <td>{{ payment.id }}</td>
+          <td>{{ payment.rental | titlecase }}</td>
+          <td>{{ payment.amount }}</td>
+          <td>{{ payment.paymentMethod }}</td>
+          <td>{{ payment.paymentDate }}</td>
+          <td>{{ payment.updatedAt | date: 'dd/MM/yyyy, HH:mm:ss' }}</td>
+          <td>{{ payment.modifiedBy }}</td>
+          <td>
+            <a
+              [routerLink]="['/services/payment', payment.id]"
+              class="btn btn-ghost text-accent btn-xs"
+            >
+              Editar
+            </a>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

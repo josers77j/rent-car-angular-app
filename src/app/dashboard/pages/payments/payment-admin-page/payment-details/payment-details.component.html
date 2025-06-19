@@ -1,0 +1,92 @@
+<h1 class="text-2xl font-bold">{{ payment().rentalId || 'Nuevo alquiler' }}</h1>
+<div class="divider"></div>
+
+<form
+  [formGroup]="paymentForm"
+  class="grid grid-cols-1 sm:grid-cols-2 gap-6"
+  (ngSubmit)="onSubmit()"
+>
+  <!-- Datos generales -->
+  <div class="flex flex-col gap-4">
+    <h2 class="text-2xl font-bold">Datos generales</h2>
+
+    <!-- No. de alquiler -->
+    <div class="form-control">
+      <label for="rentalId" class="label">
+        <span class="label-text font-semibold">No. de alquiler</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="rentalId"
+        type="number"
+        placeholder="Ingresa el número del alquiler"
+        class="input input-bordered w-full"
+        formControlName="rentalId"
+      />
+      <form-error-label [control]="paymentForm.get('rentalId')!"></form-error-label>
+    </div>
+
+    <!-- Monto -->
+    <div class="form-control">
+      <label for="amount" class="label">
+        <span class="label-text font-semibold">Monto</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="amount"
+        type="number"
+        placeholder="Ingresa el monto"
+        class="input input-bordered w-full"
+        formControlName="amount"
+      />
+      <form-error-label [control]="paymentForm.get('amount')!"></form-error-label>
+    </div>
+
+    <!-- Método de pago -->
+    <div class="form-control">
+      <label for="paymentMethod" class="label">
+        <span class="label-text font-semibold">Método de pago</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="paymentMethod"
+        type="text"
+        placeholder="Ingresa el método de pago"
+        class="input input-bordered w-full"
+        formControlName="paymentMethod"
+      />
+      <form-error-label [control]="paymentForm.get('paymentMethod')!"></form-error-label>
+    </div>
+
+    <!-- Fecha de pago -->
+    <div class="form-control">
+      <label for="paymentDate" class="label">
+        <span class="label-text font-semibold">Fecha de pago</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="paymentDate"
+        type="date"
+        placeholder="Ingresa la fecha de pago"
+        class="input input-bordered w-full"
+        formControlName="paymentDate"
+      />
+      <form-error-label [control]="paymentForm.get('paymentDate')!"></form-error-label>
+    </div>
+  </div>
+
+  <!-- Botón de guardar -->
+  <div class="flex flex-col gap-4">
+    <div class="flex justify-end">
+      <button class="btn btn-primary" type="submit">
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+@if (wasSaved()) {
+  <div class="alert alert-success fixed bottom-4 right-4 w-80 animate-fadeIn">
+    <span>Datos actualizados correctamente</span>
+  </div>
+}

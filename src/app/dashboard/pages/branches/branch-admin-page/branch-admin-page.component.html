@@ -1,0 +1,11 @@
+@if (branchResource.isLoading()) {
+  <div class="flex justify-center items-center h-screen">
+    <span class="loading loading-spinner loading-lg"></span>
+  </div>
+  }
+  <!--  -->
+
+  @if( branchResource.hasValue() ) {
+  <!-- Producto -->
+  <branch-details [branch]="branchResource.value()!" (branchUpdated)="branchResource.reload()"/>
+  }

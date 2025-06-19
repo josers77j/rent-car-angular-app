@@ -17,7 +17,7 @@ export class RolesAdminPageComponent {
   paginationService = inject(PaginationService);
 
   constructor(private roleUpdateService: RoleUpdateService) {
-    // Suscribirse al evento de actualización de usuarios
+    // Suscribirse al evento de actualización de roles
     this.roleUpdateService.roleUpdated$.subscribe(() => {
       console.log('Rol actualizado, recargando tabla...');
       this.rolesResource.reload();

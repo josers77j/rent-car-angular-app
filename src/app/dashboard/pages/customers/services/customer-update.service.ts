@@ -8,7 +8,7 @@ export class CustomerUpdateService {
   private customerUpdatedSource = new Subject<void>();
   customerUpdated$ = this.customerUpdatedSource.asObservable();
 
-  // Método para notificar que un usuario fue actualizado o creado
+  // Método para notificar que un cliente fue actualizado o creado
   notifyCustomerUpdated() {
     this.customerUpdatedSource.next();
   }

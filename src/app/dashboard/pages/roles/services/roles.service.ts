@@ -60,10 +60,10 @@ export class RolesService {
 
   updateRole(
     id: number,
-    userLike: Partial<Role>
+    roleLike: Partial<Role>
   ): Observable<Roles> {
     return this.http
-      .patch<Roles>(`${baseUrl}/roles/${id}`, userLike)
+      .patch<Roles>(`${baseUrl}/roles/${id}`, roleLike)
       .pipe(
         tap((resp) => console.log('actualizando ',resp))
       );

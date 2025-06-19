@@ -11,9 +11,9 @@ export interface Customers {
   phone:     string;
   email:     string;
   address:    string;
-  createdAt: Date;
   identification:      string;
   identificationType:      string;
+  createdAt: Date;
   updatedAt: Date;
   date:      Date;
   modifiedBy: number;
@@ -30,18 +30,10 @@ export interface Meta {
 }
 
 export interface Customer {
-  email: string;
   name:  string;
   phone: string;
+  email: string;
+  address:    string;
   identification:      string;
   identificationType:      string;
- }
-
-
- export interface IdentificationTypeItem {
-  id:number;
-  name:string;
-  description:string;
-  createdAt:Date;
-  updatedAt:Date;
  }

@@ -13,7 +13,7 @@
     <!-- Nombre -->
     <div class="form-control">
       <label for="name" class="label">
-        <span class="label-text font-semibold">Nombre y Apellido</span>
+        <span class="label-text font-semibold">Nombre y apellido</span>
         <span class="label-text-alt text-gray-500"></span>
       </label>
       <input
@@ -34,7 +34,7 @@
       </label>
       <input
         id="phone"
-        type="phone"
+        type="text"
         placeholder="Ingresa el teléfono"
         class="input input-bordered w-full"
         formControlName="phone"
@@ -67,7 +67,7 @@
       <input
         id="address"
         type="text"
-        placeholder="Ingresa la dirección del cliente"
+        placeholder="Ingresa la dirección"
         class="input input-bordered w-full"
         formControlName="address"
       />
@@ -83,7 +83,7 @@
       <input
         id="identificaction"
         type="text"
-        placeholder="Ingresa la identificación del cliente"
+        placeholder="Ingresa la identificación"
         class="input input-bordered w-full"
         formControlName="identification"
       />
@@ -93,18 +93,17 @@
     <!-- Tipo de identificación -->
     <div class="form-control">
       <label for="identificationType" class="label">
-        <span class="label-text font-semibold">Tipo de identificación</span>
+        <span class="label-text font-semibold">Tipo de identificación (id)</span>
         <span class="label-text-alt text-gray-500"></span>
       </label>
-      <select
-        id="identificationType"
-        class="select select-bordered w-full"
+      <input
+        id="identificactionType"
+        type="text"
+        placeholder="Ingresa la identificación"
+        class="input input-bordered w-full"
         formControlName="identificationType"
-      >
-        <option value="" disabled selected>Selecciona un tipo de identificación</option>
-        <option *ngFor="let type of identificationTypes" [value]="type">{{ type }}</option>
-      </select>
-      <form-error-label [control]="customerForm.get('customer')!"></form-error-label>
+      />
+      <form-error-label [control]="customerForm.get('identificationType')!"></form-error-label>
     </div>
   </div>
 

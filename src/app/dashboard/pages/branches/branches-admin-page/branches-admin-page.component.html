@@ -1,0 +1,33 @@
+<h1 class="text-2xl font-bold">Listado de sucursales</h1>
+<h3 class="text-lg">Total de sucursales:
+  <span class="text-accent">
+    {{branchesResource.value()?.meta?.total}}
+  </span>
+</h3>
+<div class="divider"></div>
+
+<div class="flex gap-2 items-center h-20">
+  <app-pagination
+    [pages]="branchesResource.value()?.meta?.lastpage ?? 1"
+    [currentPage]="paginationService.currentPage()"
+  />
+
+  <select
+    class="select select-bordered w-32"
+    (change)="branchesPerPage.set(+selectPerPage.value)"
+    #selectPerPage
+  >
+  <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="50">50</option>
+  </select>
+  <div class="flex flex-1"></div>
+
+
+  <button class="btn btn-primary" routerLink="/services/branch">
+    Nueva sucursal
+  </button>
+
+</div>
+
+<branch-table [branches]="branchesResource.value()?.data ?? []"></branch-table>

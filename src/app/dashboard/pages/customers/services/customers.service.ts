@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, of, tap } from 'rxjs';
-import { IdentificationTypeItem, Customer, Customers, CustomersResponse } from '../interfaces/customer.interfaces';
+import { Customer, Customers, CustomersResponse } from '../interfaces/customer.interfaces';
 import { environment } from '../../../../../environments/environment.development';
 import { CustomerMapper } from '../mapper/customer.mapper';
 
@@ -41,7 +41,7 @@ export class CustomersService {
     const key = `${perPage}-${page}`; // 9-0
 
     return this.http
-      .get<CustomersResponse>(`${baseUrl}/customers/all`, {
+      .get<CustomersResponse>(`${baseUrl}/clients`, {
         params: {
           perPage,
           page,
@@ -55,7 +55,7 @@ export class CustomersService {
   createCustomer(customer: Customer): Observable<Customers> {
 
     return this.http
-    .post<Customers>(`${baseUrl}/customers`, customer)
+    .post<Customers>(`${baseUrl}/clients`, customer)
     .pipe(
       tap((resp) => console.log('creando',resp))
     );
@@ -64,10 +64,10 @@ export class CustomersService {
 
   updateCustomer(
     id: number,
-    userLike: Partial<Customer>
+    customerLike: Partial<Customer>
   ): Observable<Customers> {
     return this.http
-      .patch<Customers>(`${baseUrl}/customers/${id}`, userLike)
+      .patch<Customers>(`${baseUrl}/clients/${id}`, customerLike)
       .pipe(
         tap((resp) => console.log('actualizando ',resp))
       );
@@ -83,7 +83,7 @@ export class CustomersService {
     }
 
     return this.http
-      .get<CustomersResponse>(`${baseUrl}/customers/all`,{
+      .get<CustomersResponse>(`${baseUrl}/clients`,{
         params:{
           customerId: id
         }
@@ -92,15 +92,5 @@ export class CustomersService {
         map((customerData) => customerData.data[0]),
       );
   }
-
-  getIdentificationType(): Observable<IdentificationTypeItem[]> {
-    return this.http
-    .get<IdentificationTypeItem[]>(`${baseUrl}/identifications/all`)
-    .pipe(
-      tap((resp) => console.log(resp)),
-    );
-
-  }
-
 
 }

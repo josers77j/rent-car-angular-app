@@ -19,7 +19,6 @@ export class CustomerDetailsComponent   implements OnInit   {
 
   @Output() customerUpdated = new EventEmitter<void>();
   customer = input.required<Customers>();
-  identificationTypes = ['dni', 'passport', 'drive_license'];
   router = inject(Router);
   fb = inject(FormBuilder);
   CustomerUpdateService = inject(CustomerUpdateService);
@@ -28,11 +27,11 @@ export class CustomerDetailsComponent   implements OnInit   {
 
   customerForm = this.fb.group({
     name: ['', [Validators.required, Validators.pattern(FormUtils.namePattern)]],
-    phone: [''],
+    phone: ['', [Validators.required, Validators.pattern(FormUtils.phonePattern)]],
     email: ['', [Validators.required, Validators.pattern(FormUtils.emailPattern)]],
-    address: [''],
-    identification: [''],
-    identificationType: ['', Validators.required],
+    address: ['', [Validators.required, Validators.pattern(FormUtils.generalTextPattern)]],
+    identification: ['', [Validators.required, Validators.pattern(FormUtils.generalTextPattern)]],
+    identificationType: [''/*, Validators.required*/],
   });
 
 
@@ -46,6 +45,7 @@ export class CustomerDetailsComponent   implements OnInit   {
       name: formLike.name || '',
       phone: formLike.phone || '',
       email: formLike.email || '',
+      address: formLike.address || '',
       identification: formLike.identification || '',
       identificationType: formLike.identificationType || '',
     });
@@ -62,6 +62,7 @@ export class CustomerDetailsComponent   implements OnInit   {
       name: formValue.name!,
       phone: formValue.phone!,
       email: formValue.email!,
+      address: formValue.address!,
       identification: formValue.identification!,
       identificationType: formValue.identificationType!,
     };

@@ -13,16 +13,18 @@ interface Options {
 
 const emptyVehicle: Vehicles = {
   id: 0,
-  plateNumber: '',
   brand: '',
   model: '',
-  type: '',
   year: 0,
+  plateNumber: '',
+  type: '',
+  status: '',
+  dailyRate: 0,
+  modifiedBy: 0, /* estaba en string*/
+  modified: '',
   createdAt: new Date(),
   updatedAt: new Date(),
-  date:      new Date(),
-  modifiedBy: 0,
-  modified:   '',
+  date: new Date(),
 };
 
 @Injectable({
@@ -40,7 +42,7 @@ export class VehiclesService {
     const key = `${perPage}-${page}`; // 9-0
 
     return this.http
-      .get<VehiclesResponse>(`${baseUrl}/vehicles/all`, {
+      .get<VehiclesResponse>(`${baseUrl}/vehicles`, {
         params: {
           perPage,
           page,
@@ -51,7 +53,7 @@ export class VehiclesService {
       );
   }
 
-  createVehicle(vehicle: Vehicles): Observable<Vehicles> {
+  createVehicle(vehicle: Vehicle): Observable<Vehicles> {
 
     return this.http
     .post<Vehicles>(`${baseUrl}/vehicles`, vehicle)
@@ -82,7 +84,7 @@ export class VehiclesService {
     }
 
     return this.http
-      .get<VehiclesResponse>(`${baseUrl}/vehicles/all`,{
+      .get<VehiclesResponse>(`${baseUrl}/vehicles`,{
         params:{
           vehicleId: id
         }

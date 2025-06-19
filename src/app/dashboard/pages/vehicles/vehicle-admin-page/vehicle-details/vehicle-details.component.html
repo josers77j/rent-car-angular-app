@@ -1,4 +1,4 @@
-<h1 class="text-2xl font-bold">{{ vehicle().name || 'Nuevo vehículo' }}</h1>
+<h1 class="text-2xl font-bold">{{ vehicle().plateNumber || 'Nuevo vehículo' }}</h1>
 <div class="divider"></div>
 
 <form
@@ -10,7 +10,7 @@
   <div class="flex flex-col gap-4">
     <h2 class="text-2xl font-bold">Datos generales</h2>
 
-    <!-- Nombre -->
+    <!-- Número de placa -->
     <div class="form-control">
       <label for="plateNumber" class="label">
         <span class="label-text font-semibold">No. de placa</span>
@@ -19,14 +19,14 @@
       <input
         id="plateNumber"
         type="text"
-        placeholder="Ingresa el número de placa"
+        placeholder="Ingresa el número de placa del vehículo"
         class="input input-bordered w-full"
         formControlName="plateNumber"
       />
       <form-error-label [control]="vehicleForm.get('plateNumber')!"></form-error-label>
     </div>
 
-    <!-- Email -->
+    <!-- Marca -->
     <div class="form-control">
       <label for="brand" class="label">
         <span class="label-text font-semibold">Marca</span>
@@ -42,7 +42,7 @@
       <form-error-label [control]="vehicleForm.get('brand')!"></form-error-label>
     </div>
 
-    <!-- Role -->
+    <!-- Modelo -->
     <div class="form-control">
       <label for="model" class="label">
         <span class="label-text font-semibold">Modelo</span>
@@ -51,14 +51,14 @@
       <input
         id="model"
         type="text"
-        placeholder="Ingresa el modelo"
+        placeholder="Ingresa el modelo del vehículo"
         class="input input-bordered w-full"
         formControlName="model"
       />
       <form-error-label [control]="vehicleForm.get('model')!"></form-error-label>
     </div>
 
-    <!-- Role -->
+    <!-- Año -->
     <div class="form-control">
       <label for="year" class="label">
         <span class="label-text font-semibold">Año</span>
@@ -67,14 +67,14 @@
       <input
         id="year"
         type="number"
-        placeholder="Ingresa el año"
+        placeholder="Ingresa el año del vehículo"
         class="input input-bordered w-full"
         formControlName="year"
       />
       <form-error-label [control]="vehicleForm.get('year')!"></form-error-label>
     </div>
 
-    <!-- Role -->
+    <!-- Categoría -->
     <div class="form-control">
       <label for="type" class="label">
         <span class="label-text font-semibold">Categoría</span>
@@ -82,14 +82,73 @@
       </label>
       <input
         id="type"
-        type="number"
-        placeholder="Ingresa la categoría"
+        type="text"
+        placeholder="Ingresa la categoría del vehículo"
         class="input input-bordered w-full"
         formControlName="type"
       />
       <form-error-label [control]="vehicleForm.get('type')!"></form-error-label>
     </div>
+
+    <!-- Estado -->
+    <div class="form-control">
+      <label for="status" class="label">
+        <span class="label-text font-semibold">Estado</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="status"
+        type="text"
+        placeholder="Ingresa el estado del vehículo"
+        class="input input-bordered w-full"
+        formControlName="status"
+      />
+      <form-error-label [control]="vehicleForm.get('status')!"></form-error-label>
+    </div>
+
+    <!-- Tarifa diaria -->
+    <div class="form-control">
+      <label for="dailyRate" class="label">
+        <span class="label-text font-semibold">Tarifa diaria</span>
+        <span class="label-text-alt text-gray-500"></span>
+      </label>
+      <input
+        id="dailyRate"
+        type="number"
+        placeholder="Ingresa la tarifa diaria del vehículo"
+        class="input input-bordered w-full"
+        formControlName="dailyRate"
+      />
+      <form-error-label [control]="vehicleForm.get('dailyRate')!"></form-error-label>
+    </div>
   </div>
+
+<!-- ------------------------------------------------------------------------------------------------------- -->
+<div class="container mx-auto p-4">
+  <span class="label-text font-semibold">Imagen del vehículo</span>
+  <!-- Formulario de subida -->
+  <form (submit)="onUpload($event)" class="flex flex-col gap-4">
+    <input
+      type="file"
+      (change)="onFileChange($event)"
+      accept="image/*"
+      class="border p-2 rounded"
+    />
+    <button
+      type="submit"
+      class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+    >
+      Subir imagen
+    </button>
+  </form>
+
+  <!-- Vista previa de la imagen subida -->
+  <div *ngIf="imageUrl" class="mt-6">
+    <h2 class="text-xl font-bold mb-2">Imagen subida:</h2>
+    <img [src]="imageUrl" alt="Imagen subida" class="border rounded shadow max-w-xs" />
+  </div>
+</div>
+<!-- ------------------------------------------------------------------------------------------------------- -->
 
   <!-- Botón de guardar -->
   <div class="flex flex-col gap-4">
@@ -100,6 +159,10 @@
     </div>
   </div>
 </form>
+
+<!-- ------------------------------------------------------------------------------------------------------- -->
+
+<!-- ------------------------------------------------------------------------------------------------------- -->
 
 @if (wasSaved()) {
   <div class="alert alert-success fixed bottom-4 right-4 w-80 animate-fadeIn">

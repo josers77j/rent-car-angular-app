@@ -1,0 +1,46 @@
+<div class="overflow-x-auto">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>
+          <label>
+            <input type="checkbox" class="checkbox" />
+          </label>
+        </th>
+        <th>Id</th>
+        <th>Distrito</th>
+        <th>Municipio</th>
+        <th>Departamento</th>
+        <th>Fecha de modificación</th>
+        <th>Modificado por</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(branch of branches(); track branch.id; let i = $index) {
+        <tr>
+          <td>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </td>
+          <td>{{ branch.id }}</td>
+          <td>{{ branch.district | titlecase }}</td>
+          <td>{{ branch.city }}</td>
+          <td>{{ branch.state }}</td>
+          <td>{{ branch.updatedAt | date: 'dd/MM/yyyy, HH:mm:ss' }}</td>
+          <td>{{ branch.modifiedBy }}</td>
+          <td>
+            <a
+              [routerLink]="['/services/branch', branch.id]"
+              class="btn btn-ghost text-accent btn-xs"
+            >
+              Editar
+            </a>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

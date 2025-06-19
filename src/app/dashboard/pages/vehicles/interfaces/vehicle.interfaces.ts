@@ -6,17 +6,19 @@ export interface VehiclesResponse {
 }
 
 export interface Vehicles {
-  id:        number;
-  plateNumber:      string;
-  brand:     string;
-  model:    string;
-  type:    string;
-  createdAt: Date;
-  year:      number;
-  updatedAt: Date;
-  date:      Date;
-  modifiedBy: number;
+  id:          number;
+  brand:       string;
+  model:       string;
+  year:        number;
+  plateNumber: string;
+  type:        string;
+  status:      string;
+  dailyRate:   number;
+  modifiedBy:  number; /* estaba en string*/
   modified:   string;
+  createdAt:   Date;
+  updatedAt:   Date;
+  date:       Date;
 }
 
 export interface Meta {
@@ -29,9 +31,11 @@ export interface Meta {
 }
 
 export interface Vehicle {
-  plateNumber:      string;
-  brand:     string;
-  model:    string;
-  type:    string;
-  year:      number;
+  brand:       string;
+  model:       string;
+  year:        number;
+  plateNumber: string;
+  type:        string;
+  status:      string;
+  dailyRate:   number;
  }

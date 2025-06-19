@@ -1,0 +1,11 @@
+@if (paymentResource.isLoading()) {
+  <div class="flex justify-center items-center h-screen">
+    <span class="loading loading-spinner loading-lg"></span>
+  </div>
+  }
+  <!--  -->
+
+  @if( paymentResource.hasValue() ) {
+  <!-- Producto -->
+  <payment-details [payment]="paymentResource.value()!" (paymentUpdated)="paymentResource.reload()"/>
+  }
